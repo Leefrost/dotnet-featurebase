@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Collections.ObjectModel;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Leefrost.Featurebase.Clients.Community;
 
-public sealed class CommunityFeaturebaseClient : IDisposable, IFeaturebaseClient
+public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
 {
     private const string PqlEndpoint = "query";
 
@@ -23,9 +24,9 @@ public sealed class CommunityFeaturebaseClient : IDisposable, IFeaturebaseClient
 
     public string Provider => "Community";
 
-    public async Task CheckAvailabilityAsync(string query, CancellationToken cancellationToken)
+    public async Task CheckAvailabilityAsync(CancellationToken cancellationToken)
     {
-        var content = new StringContent(query);
+        var content = new StringContent("Limit(All(), limit=1))");
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
 
@@ -33,12 +34,22 @@ public sealed class CommunityFeaturebaseClient : IDisposable, IFeaturebaseClient
             throw new Exception("Failed check");
     }
 
-    public async Task<int> ExecuteAsync(string query, CancellationToken cancellationToken)
+    public Task<long> CountAsync(string query, CancellationToken cancellationToken)
+    {
+        return Task.FromResult(0L);
+    }
+
+    public Task<ReadOnlyCollection<T>> SelectAsync<T>(string query, CancellationToken cancellationToken)
+    {
+        return Task.FromResult(new ReadOnlyCollection<T>(new List<T>()));
+    }
+
+    public async Task<string> ExecuteRawPqlAsync(string query, CancellationToken cancellationToken)
     {
         var content = new StringContent(query);
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-        return 0;
+        return await response.Content.ReadAsStringAsync(cancellationToken);
     }
 
     public void Dispose() => _httpClient.Dispose();

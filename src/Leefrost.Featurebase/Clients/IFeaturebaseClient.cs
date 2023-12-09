@@ -1,8 +1,12 @@
-﻿namespace Leefrost.Featurebase.Clients;
+﻿using System.Collections.ObjectModel;
 
-public interface IFeaturebaseClient
+namespace Leefrost.Featurebase.Clients;
+
+public interface IFeaturebaseClient: IDisposable
 {
     string Provider { get; }
-    Task CheckAvailabilityAsync(string query, CancellationToken cancellationToken);
-    Task<int> ExecuteAsync(string query, CancellationToken cancellationToken);
+    Task CheckAvailabilityAsync(CancellationToken cancellationToken);
+    Task<long> CountAsync(string query, CancellationToken cancellationToken);
+    Task<ReadOnlyCollection<T>> SelectAsync<T>(string query, CancellationToken cancellationToken);
+    Task<string> ExecuteRawPqlAsync(string query, CancellationToken cancellationToken);
 }

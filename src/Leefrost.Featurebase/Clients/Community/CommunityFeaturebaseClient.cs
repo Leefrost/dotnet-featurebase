@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using Leefrost.Featurebase.Clients.Community.Responses;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -29,19 +29,29 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         var content = new StringContent("Limit(All(), limit=1))");
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-
-        if (!response.IsSuccessStatusCode)
-            throw new Exception("Failed check");
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
     }
 
-    public Task<long> CountAsync(string query, CancellationToken cancellationToken)
+    public async Task<long> CountAsync(string query, CancellationToken cancellationToken)
     {
-        return Task.FromResult(0L);
+        var content = new StringContent(query);
+
+        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
+
+        var result = await response.FetchAsync<CommunityCount>(cancellationToken);
+        return result.Result;
     }
 
-    public Task<ReadOnlyCollection<T>> SelectAsync<T>(string query, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<string>> SelectAsync(string query, CancellationToken cancellationToken)
     {
-        return Task.FromResult(new ReadOnlyCollection<T>(new List<T>()));
+        var content = new StringContent(query);
+
+        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
+
+        var result = await response.FetchAsync<CommunityDistinct>(cancellationToken);
+        return result.Result.ToList();
     }
 
     public async Task<string> ExecuteRawPqlAsync(string query, CancellationToken cancellationToken)
@@ -49,7 +59,10 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         var content = new StringContent(query);
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-        return await response.Content.ReadAsStringAsync(cancellationToken);
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
+
+        var result = await response.Content.ReadAsStringAsync(cancellationToken);
+        return result;
     }
 
     public void Dispose() => _httpClient.Dispose();

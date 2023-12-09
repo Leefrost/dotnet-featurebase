@@ -1,6 +1,6 @@
 ﻿namespace Leefrost.Featurebase.Clients.Community.Responses;
 
-internal record CommunityCount(IEnumerable<int> Results)
+internal record CommunityCount(IEnumerable<long> Results)
 {
-    public int Result => Results.FirstOrDefault();
+    public long Result => Results.FirstOrDefault();
 }

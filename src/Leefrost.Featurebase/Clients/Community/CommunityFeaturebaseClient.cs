@@ -13,6 +13,20 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
     private readonly ILogger<CommunityFeaturebaseClient> _logger;
 
     public CommunityFeaturebaseClient(
+        Uri connectionUrl,
+        IOptions<FeaturebaseCommunityOptions> options,
+        ILogger<CommunityFeaturebaseClient> logger)
+    {
+        _httpClient = new HttpClient
+        {
+            BaseAddress = connectionUrl
+        };
+
+        _options = options.Value;
+        _logger = logger;
+    }
+
+    public CommunityFeaturebaseClient(
         HttpClient httpClient,
         IOptions<FeaturebaseCommunityOptions> options,
         ILogger<CommunityFeaturebaseClient> logger)

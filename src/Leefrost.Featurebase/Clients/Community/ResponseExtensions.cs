@@ -6,7 +6,7 @@ internal static class ResponseExtensions
     internal static async Task ThrowIfNotSuccessfulAsync(this HttpResponseMessage message,
         CancellationToken cancellationToken)
     {
-        if (!message.IsSuccessStatusCode)
+        if (message.IsSuccessStatusCode)
             return;
 
         var errorMessage = await message.Content.ReadAsStringAsync(cancellationToken);

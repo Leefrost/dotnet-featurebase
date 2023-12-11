@@ -19,12 +19,8 @@ public class CommunityFeaturebaseClientTests
         handler.SetupAnyRequest()
             .ReturnsResponse(HttpStatusCode.NotFound);
 
-        handler.SetupRequest(HttpMethod.Get, "https://featurebase-db.com/base")
-            .ReturnsJsonResponse("OK");
-
-        // Setting additional headers on the response using the optional configure action
         handler.SetupRequest(HttpMethod.Post, "https://featurebase-db.com/query")
-            .ReturnsJsonResponse(HttpStatusCode.OK, responseContent);
+            .ReturnsResponse(HttpStatusCode.OK, responseContent);
 
         var opt = Options.Create(options);
 
@@ -46,7 +42,7 @@ public class CommunityFeaturebaseClientTests
     public async Task CountAsync_CheckCall_CallIsSuccessful()
     {
         var options = new FeaturebaseCommunityOptions { Index = "index" };
-        var client = CreateClient(options, "{results: [100]}");
+        var client = CreateClient(options, "{ results: [100]}");
 
         var count = await client.CountAsync("Count(All())", default);
 
@@ -57,7 +53,7 @@ public class CommunityFeaturebaseClientTests
     public async Task SelectAsync_CheckCall_CallIsSuccessful()
     {
         var options = new FeaturebaseCommunityOptions { Index = "index" };
-        var client = CreateClient(options, "{results: [100]}");
+        var client = CreateClient(options, "{ results: [{ keys: ['123'] }] }");
 
         var count = await client.SelectAsync("Distinct(All())", default);
 

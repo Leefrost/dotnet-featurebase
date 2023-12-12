@@ -85,35 +85,24 @@ public class Row : PqlQuery
     }
 
     public Row(string field, bool value)
-    {
-        _field = field;
-        _value = value.ToString();
-    }
+        : this(field, value.ToString().ToLower())
+    { }
 
     public Row(string field, int value)
-    {
-        _field = field;
-        _value = value.ToString();
-    }
+        : this(field, value.ToString())
+    { }
 
     public Row(string field, long value)
-    {
-        _field = field;
-        _value = value.ToString();
-    }
+        : this(field, value.ToString())
+    { }
 
     public Row(string field, double value)
-    {
-        _field = field;
-
-        _value = value.ToString(CultureInfo.InvariantCulture);
-    }
+        : this(field, value.ToString(CultureInfo.InvariantCulture))
+    { }
 
     public Row(string field, TimeSpan value)
-    {
-        _field = field;
-        _value = value.ToString();
-    }
+        : this(field, value.ToString())
+    { }
 
     public Row(string field, string value, TimeSpan from, TimeSpan to)
         : this(field, value)
@@ -140,7 +129,7 @@ public class Row : PqlQuery
             builder.Append($"{_field}={_value}");
 
         if (_from != TimeSpan.Zero && _to != TimeSpan.Zero)
-            builder.Append($"from={_from.ToString()} to={_to.ToString()}");
+            builder.Append($",from={_from.ToString()},to={_to.ToString()}");
 
         builder.Append(')');
 

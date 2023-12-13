@@ -2,7 +2,8 @@
 using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
-internal class Rows : PqlQuery
+
+public class Rows : PqlQuery
 {
     private readonly string? _previous;
     private readonly string _field;
@@ -12,7 +13,6 @@ internal class Rows : PqlQuery
 
     private readonly TimeSpan _from = TimeSpan.Zero;
     private readonly TimeSpan _to = TimeSpan.Zero;
-
 
     public Rows(string field)
     {
@@ -64,7 +64,7 @@ internal class Rows : PqlQuery
     public override string Build()
     {
         var builder = new StringBuilder();
-        builder.Append("Row(");
+        builder.Append("Rows(");
         builder.Append($"{_field}");
         
         if (_like is not null) 

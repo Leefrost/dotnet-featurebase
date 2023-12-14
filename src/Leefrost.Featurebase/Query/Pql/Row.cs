@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Leefrost.Featurebase.Query.Pql;
 
-public class Row : PqlQuery
+public class Row : PqlRowQuery
 {
     private readonly string? _field;
     private readonly string? _value;

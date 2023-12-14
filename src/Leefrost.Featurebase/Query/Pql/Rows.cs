@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
 
-public class Rows : PqlQuery
+public class Rows : PqlRowQuery
 {
     private readonly string? _previous;
     private readonly string _field;

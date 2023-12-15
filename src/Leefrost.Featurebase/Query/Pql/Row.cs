@@ -20,7 +20,7 @@ public class Row : PqlRowQuery
         {
             return false;
         }
-        
+
         var parts = Regex.Split(expression, @"([><=!]+)");
 
         if (parts.Length < 2 || parts.Length % 2 == 0)
@@ -79,7 +79,7 @@ public class Row : PqlRowQuery
     {
         if (string.IsNullOrEmpty(field) || string.IsNullOrEmpty(value))
             throw new ArgumentException("Field and Value must have a value");
-        
+
         _field = field;
         _value = value;
     }

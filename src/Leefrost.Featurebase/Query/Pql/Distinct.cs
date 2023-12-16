@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
-internal class Distinct : PqlQuery
+public class Distinct : PqlQuery
 {
     private readonly PqlRowQuery _rowQuery;
     private readonly string _field;

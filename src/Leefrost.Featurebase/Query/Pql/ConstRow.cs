@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
-public class ConstRow : PqlRowQuery
+public class ConstRow : RowQuery
 {
     private readonly List<string> _columns;
 

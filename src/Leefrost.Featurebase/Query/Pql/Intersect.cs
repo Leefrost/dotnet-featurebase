@@ -1,17 +1,17 @@
 ﻿using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
-public class Intersect : PqlRowQuery
+public class Intersect : RowQuery
 {
-    private readonly List<PqlRowQuery> _rows = [];
+    private readonly List<RowQuery> _rows = [];
 
-    public Intersect(PqlRowQuery row1, PqlRowQuery row2)
+    public Intersect(RowQuery row1, RowQuery row2)
     {
         _rows.Add(row1);
         _rows.Add(row2);
     }
 
-    public Intersect(IEnumerable<PqlRowQuery> rows)
+    public Intersect(IEnumerable<RowQuery> rows)
     {
         _rows = rows.ToList();
     }

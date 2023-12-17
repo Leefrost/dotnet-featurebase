@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Leefrost.Featurebase.Query.Pql;
 
-public class Row : PqlRowQuery
+public class Row : RowQuery
 {
     private readonly string? _field;
     private readonly string? _value;
@@ -70,7 +70,7 @@ public class Row : PqlRowQuery
     {
         if (!IsValidExpression(expression))
             throw new ArgumentException(
-                $"Expression {expression} is not valid. Expression must be a valid logical one");
+                $"Expression '{expression}' is not valid. Expression must be a valid logical one");
 
         _expression = expression;
     }

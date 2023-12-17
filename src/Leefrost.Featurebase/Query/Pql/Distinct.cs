@@ -1,19 +1,19 @@
 ﻿using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
-public class Distinct : PqlQuery
+public class Distinct : Query
 {
-    private readonly PqlRowQuery _rowQuery;
+    private readonly RowQuery _rowQuery;
     private readonly string _field;
     private readonly string? _index;
 
-    public Distinct(PqlRowQuery rowQuery, string field)
+    public Distinct(RowQuery rowQuery, string field)
     {
         _rowQuery = rowQuery;
         _field = field;
     }
 
-    public Distinct(PqlRowQuery rowQuery, string field, string index)
+    public Distinct(RowQuery rowQuery, string field, string index)
         : this(rowQuery, field)
     {
         if (string.IsNullOrEmpty(index))

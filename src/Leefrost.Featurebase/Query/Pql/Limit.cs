@@ -1,19 +1,19 @@
 ﻿using System.Text;
 
 namespace Leefrost.Featurebase.Query.Pql;
-public class Limit : PqlRowQuery
+public class Limit : RowQuery
 {
-    private readonly PqlRowQuery _query;
+    private readonly RowQuery _query;
 
     private readonly uint _limit;
     private readonly uint _offset;
 
-    public Limit(PqlRowQuery query)
+    public Limit(RowQuery query)
     {
         _query = query;
     }
 
-    public Limit(PqlRowQuery query, uint limit, uint offset)
+    public Limit(RowQuery query, uint limit, uint offset)
         : this(query)
     {
         _limit = limit;

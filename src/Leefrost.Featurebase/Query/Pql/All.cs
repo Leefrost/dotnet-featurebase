@@ -1,5 +1,5 @@
 ﻿namespace Leefrost.Featurebase.Query.Pql;
-public class All : PqlRowQuery
+public class All : RowQuery
 {
     public override string Build()
     {

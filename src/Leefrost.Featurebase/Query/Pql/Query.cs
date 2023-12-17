@@ -1,11 +1,11 @@
 ﻿namespace Leefrost.Featurebase.Query.Pql;
 
-public abstract class PqlQuery
+public abstract class Query
 {
     public abstract string Build();
 }
 
-public abstract class PqlRowQuery : PqlQuery
+public abstract class RowQuery : Query
 {
 
 }

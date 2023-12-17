@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
-
-using static Leefrost.Featurebase.Query.Pql.Blocks;
+using static Leefrost.Featurebase.Query.Blocks;
 
 namespace Leefrost.Featurebase.Tests.Query.Pql;
 

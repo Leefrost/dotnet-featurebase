@@ -1,4 +1,4 @@
-﻿namespace Leefrost.Featurebase.Query.Pql;
+﻿namespace Leefrost.Featurebase.Query;
 
 public static class Blocks
 {

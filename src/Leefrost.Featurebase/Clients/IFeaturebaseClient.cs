@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Leefrost.Featurebase.Clients;
+﻿namespace Leefrost.Featurebase.Clients;
 
 public interface IFeaturebaseClient: IDisposable
 {

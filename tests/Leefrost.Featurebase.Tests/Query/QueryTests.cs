@@ -33,4 +33,14 @@ public class QueryTests
 
         result.Should().Be("Union(Row(gender=male),Row(gender=female))");
     }
+
+    [Fact]
+    public void Diff_BetweenMales_And_Females_QueryIsValid()
+    {
+        var row = new Difference(new Row("gender", "male"), new Row("gender", "female"));
+
+        var result = row.Build();
+
+        result.Should().Be("Difference(Row(gender=male),Row(gender=female))");
+    }
 }

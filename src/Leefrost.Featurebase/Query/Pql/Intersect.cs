@@ -13,7 +13,11 @@ public class Intersect : RowQuery
 
     public Intersect(IEnumerable<RowQuery> rows)
     {
-        _rows = rows.ToList();
+        var queries = rows.ToList();
+        if (queries.Count == 0)
+            throw new ArgumentException("Intersect must have at least one row argument");
+
+        _rows = queries;
     }
     
     public override string Build()

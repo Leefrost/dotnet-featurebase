@@ -13,7 +13,11 @@ public class Difference : RowQuery
 
     public Difference(IEnumerable<RowQuery> rows)
     {
-        _rows = rows.ToList();
+        var queries = rows.ToList();
+        if (queries.Count < 2)
+            throw new ArgumentException("Difference must have at least 2 rows to compare");
+
+        _rows = queries;
     }
     
     public override string Build()

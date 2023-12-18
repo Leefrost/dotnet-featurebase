@@ -9,7 +9,7 @@ public class ConstRow : RowQuery
     {
         var columnList = columns.ToList();
         if (columnList.Count == 0)
-            throw new ArgumentException("Columns must have at least one column key");
+            throw new ArgumentException("ConstRow must have at least one column key");
 
         _columns = columnList;
     }

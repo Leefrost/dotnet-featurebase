@@ -43,4 +43,14 @@ public class QueryTests
 
         result.Should().Be("Difference(Row(gender=male),Row(gender=female))");
     }
+
+    [Fact]
+    public void Not_HasADiscount_QueryIsValid()
+    {
+        var row = new Not(new Row("has_discount", true));
+
+        var result = row.Build();
+
+        result.Should().Be("Not(Row(has_discount=true))");
+    }
 }

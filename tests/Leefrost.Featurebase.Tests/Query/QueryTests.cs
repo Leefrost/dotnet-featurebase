@@ -53,4 +53,14 @@ public class QueryTests
 
         result.Should().Be("Not(Row(has_discount=true))");
     }
+
+    [Fact]
+    public void Xor_LivedInLvivOrKyivButNotInBoth_QueryIsValid()
+    {
+        var row = new Xor(new Row("city", "Lviv"), new Row("city", "Kyiv"));
+
+        var result = row.Build();
+
+        result.Should().Be("Xor(Row(city=Lviv),Row(city=Kyiv))");
+    }
 }

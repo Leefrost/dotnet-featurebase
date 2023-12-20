@@ -63,4 +63,15 @@ public class QueryTests
 
         result.Should().Be("Xor(Row(city=Lviv),Row(city=Kyiv))");
     }
+
+    [Fact]
+    public void IncludesColumn_HavePersonLiveInLviv_QueryIsValid()
+    {
+        
+        var row = new IncludesColumn(new Row("city", "Lviv"), "person");
+
+        var result = row.Build();
+
+        result.Should().Be("IncludesColumn(Row(city=Lviv), column=person)");
+    }
 }

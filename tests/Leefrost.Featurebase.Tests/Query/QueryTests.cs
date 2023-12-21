@@ -67,11 +67,30 @@ public class QueryTests
     [Fact]
     public void IncludesColumn_HavePersonLiveInLviv_QueryIsValid()
     {
-        
         var row = new IncludesColumn(new Row("city", "Lviv"), "person");
 
         var result = row.Build();
 
         result.Should().Be("IncludesColumn(Row(city=Lviv), column=person)");
+    }
+
+    [Fact]
+    public void Count_CountAllMens_QueryIsValid()
+    {
+        var row = new Count(new Row("gender", "male"));
+
+        var result = row.Build();
+
+        result.Should().Be("Count(Row(gender=male))");
+    }
+
+    [Fact]
+    public void Count_CountAllUniqueMens_QueryIsValid()
+    {
+        var row = new Count(new Distinct(new Row("gender", "male"), "personId"));
+
+        var result = row.Build();
+
+        result.Should().Be("Count(Distinct(Row(gender=male), field=personId))");
     }
 }

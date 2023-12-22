@@ -10,7 +10,7 @@ public class UnionRows : RowQuery
     {
         var queries = rows.ToList();
         if (queries.Count == 0)
-            throw new ArgumentException("UnionRows must have at least one row argument");
+            throw new ArgumentException("UnionRows must have at least one rows argument");
 
         _rows = queries;
     }

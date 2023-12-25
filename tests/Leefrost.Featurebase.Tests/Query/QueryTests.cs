@@ -103,4 +103,14 @@ public class QueryTests
 
         result.Should().Be("GroupBy(Rows(city))");
     }
+
+    [Fact]
+    public void TopK_GetCountForAllFromLvivCity_QueryIsValid()
+    {
+        var row = new TopK(new Rows("city"), new (){ Filter = new Row("city", "Lviv") });
+        
+        var result = row.Build();
+
+        result.Should().Be("TopK(Rows(city), filter=Row(city=Lviv))");
+    }
 }

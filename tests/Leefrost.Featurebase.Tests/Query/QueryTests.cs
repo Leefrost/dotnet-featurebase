@@ -93,4 +93,14 @@ public class QueryTests
 
         result.Should().Be("Count(Distinct(Row(gender=male), field=personId))");
     }
+
+    [Fact]
+    public void GroupBy_GroupByCity_QueryIsValid()
+    {
+        var row = new GroupBy(new Rows("city"));
+
+        var result = row.Build();
+
+        result.Should().Be("GroupBy(Rows(city))");
+    }
 }

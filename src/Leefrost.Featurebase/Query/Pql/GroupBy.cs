@@ -2,19 +2,55 @@
 
 namespace Leefrost.Featurebase.Query.Pql;
 
-public class GroupBy : Query
+public sealed class GroupByOptions
 {
-    private readonly uint? _offset;
-    private readonly uint? _limit;
-    private readonly string? _sort;
-    private readonly string? _aggregate;
-    private readonly string? _condition;
-    private readonly Row? _filter;
+    public Row? Filter { get; set; }
+    public string? Condition { get; set; }
+    public string? Aggregate { get; set; }
+    public string? Sort { get; set; }
+    public uint? Limit { get; set; }
+    public uint? Offset { get; set; }
+
+    public string ExtendQuery()
+    {
+        var builder = new StringBuilder();
+
+        if (Filter is not null)
+            builder.Append($", {Filter.Build()}");
+
+        if (!string.IsNullOrEmpty(Condition))
+            builder.Append($", condition={Condition}");
+
+        if (!string.IsNullOrEmpty(Aggregate))
+            builder.Append($", aggregate={Aggregate}");
+
+        if (!string.IsNullOrEmpty(Sort))
+            builder.Append($", sort={Sort}");
+
+        if (Limit is not null)
+            builder.Append($", limit={Limit}");
+
+        if (Offset is not null)
+            builder.Append($", offset={Offset}");
+
+        return builder.ToString();
+    }
+}
+
+public sealed class GroupBy : Query
+{
     private readonly List<Rows> _queries = [];
+    private readonly GroupByOptions? _options;
 
     public GroupBy(Rows query)
     {
         _queries.Add(query);
+    }
+
+    public GroupBy(Rows query, GroupByOptions? options)
+        :this(query)
+    {
+        _options = options;
     }
 
     public GroupBy(IEnumerable<Rows> queries)
@@ -22,65 +58,20 @@ public class GroupBy : Query
         _queries = queries.ToList();
     }
 
-    public GroupBy(IEnumerable<Rows> queries, Row? filter)
+    public GroupBy(IEnumerable<Rows> queries, GroupByOptions? options)
         : this(queries)
     {
-        _filter = filter;
+        _options = options;
     }
-
-    public GroupBy(IEnumerable<Rows> queries, Row? filter, string? condition)
-        : this(queries, filter)
-    {
-        _condition = condition;
-    }
-
-    public GroupBy(IEnumerable<Rows> queries, Row? filter, string? condition, string? aggregate)
-        : this(queries, filter, condition)
-    {
-        _aggregate = aggregate;
-    }
-
-    public GroupBy(IEnumerable<Rows> queries, Row? filter, string? condition, string? aggregate, string? sort)
-        : this(queries, filter, condition, aggregate)
-    {
-        _sort = sort;
-    }
-
-    public GroupBy(IEnumerable<Rows> queries, Row? filter, string? condition, string? aggregate, string? sort, uint? limit)
-        : this(queries, filter, condition, aggregate, sort)
-    {
-        _limit = limit;
-    }
-
-    public GroupBy(IEnumerable<Rows> queries, Row? filter, string? condition, string? aggregate, string? sort, uint? limit, uint? offset)
-        : this(queries, filter, condition, aggregate, sort, limit)
-    {
-        _offset = offset;
-    }
-
+    
     public override string Build()
     {
         var builder = new StringBuilder();
         builder.Append("GroupBy(");
-        builder.Append(string.Join(',', _queries));
+        builder.Append(string.Join(',', _queries.Select(row=>row.Build())));
 
-        if (_filter is not null)
-            builder.Append($", {_filter.Build()}");
-
-        if (_condition is not null)
-            builder.Append($", {_condition}");
-
-        if (_aggregate is not null)
-            builder.Append($", {_aggregate}");
-
-        if (_sort is not null)
-            builder.Append($", {_sort}");
-
-        if (_limit is not null)
-            builder.Append($", {_limit}");
-
-        if (_offset is not null)
-            builder.Append($", {_offset}");
+        if (_options is not null)
+            builder.Append(_options.ExtendQuery());
 
         builder.Append(')');
         return builder.ToString();

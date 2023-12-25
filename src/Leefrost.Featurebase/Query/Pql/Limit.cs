@@ -5,8 +5,8 @@ public class Limit : RowQuery
 {
     private readonly RowQuery _query;
 
-    private readonly uint _limit;
-    private readonly uint _offset;
+    private readonly uint? _limit;
+    private readonly uint? _offset;
 
     public Limit(RowQuery query)
     {
@@ -26,10 +26,10 @@ public class Limit : RowQuery
         builder.Append("Limit(");
         builder.Append(_query.Build());
 
-        if (_limit > 0)
+        if (_limit is not null)
             builder.Append($", limit={_limit}");
 
-        if (_offset > 0)
+        if (_offset is not null)
             builder.Append($", offset={_offset}");
 
         builder.Append(')');

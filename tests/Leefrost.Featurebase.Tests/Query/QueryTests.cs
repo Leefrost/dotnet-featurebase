@@ -107,8 +107,8 @@ public class QueryTests
     [Fact]
     public void TopK_GetCountForAllFromLvivCity_QueryIsValid()
     {
-        var row = new TopK(new Rows("city"), new (){ Filter = new Row("city", "Lviv") });
-        
+        var row = new TopK(new Rows("city"), new() { Filter = new Row("city", "Lviv") });
+
         var result = row.Build();
 
         result.Should().Be("TopK(Rows(city), filter=Row(city=Lviv))");
@@ -142,5 +142,15 @@ public class QueryTests
         var result = row.Build();
 
         result.Should().Be("Min(field=age)");
+    }
+
+    [Fact]
+    public void Percentile_GetFrequencyOfMiddleAge_QueryIsValid()
+    {
+        var row = new Percentile("age", 50.0f);
+
+        var result = row.Build();
+
+        result.Should().Be("Percentile(field=age, nth=50)");
     }
 }

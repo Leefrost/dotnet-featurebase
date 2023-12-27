@@ -133,4 +133,14 @@ public class QueryTests
 
         result.Should().Be("Max(field=age)");
     }
+
+    [Fact]
+    public void Min_GetMinAge_QueryIsValid()
+    {
+        var row = new Min("age");
+
+        var result = row.Build();
+
+        result.Should().Be("Min(field=age)");
+    }
 }

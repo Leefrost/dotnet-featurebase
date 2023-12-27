@@ -113,4 +113,14 @@ public class QueryTests
 
         result.Should().Be("TopK(Rows(city), filter=Row(city=Lviv))");
     }
+
+    [Fact]
+    public void TopN_GetCountForAllMaleGender_QueryIsValid()
+    {
+        var row = new TopN(new Rows("city"), new() { Filter = new Row("gender", "male") });
+
+        var result = row.Build();
+
+        result.Should().Be("TopN(Rows(city), Row(gender=male))");
+    }
 }

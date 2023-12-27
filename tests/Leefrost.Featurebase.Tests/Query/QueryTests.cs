@@ -123,4 +123,14 @@ public class QueryTests
 
         result.Should().Be("TopN(Rows(city), Row(gender=male))");
     }
+
+    [Fact]
+    public void Max_GetMaxAge_QueryIsValid()
+    {
+        var row = new Max("age");
+
+        var result = row.Build();
+
+        result.Should().Be("Max(field=age)");
+    }
 }

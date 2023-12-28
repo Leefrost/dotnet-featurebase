@@ -1,5 +1,5 @@
 ﻿namespace Leefrost.Featurebase.Pql.Membership;
-public class IncludesColumn : Query
+public class IncludesColumn : ReadQuery
 {
     private readonly RowQuery _query;
     private readonly string _column;

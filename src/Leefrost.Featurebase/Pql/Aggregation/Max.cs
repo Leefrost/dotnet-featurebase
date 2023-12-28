@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql.Aggregation;
 public class Max : Query
 {
     private readonly string _field;
@@ -9,7 +9,7 @@ public class Max : Query
     public Max(string field)
     {
         if (string.IsNullOrEmpty(field))
-            throw new ArgumentException("Field is required for Max operation");
+            throw new ArgumentException("Field is required for Max operation", nameof(field));
 
         _field = field;
     }

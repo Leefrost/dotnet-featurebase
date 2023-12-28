@@ -1,6 +1,8 @@
 ﻿using System.Text;
+using Leefrost.Featurebase.Pql.Selection;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql.Exploratory;
+
 public class Extract : Query
 {
     private readonly RowQuery _filter;
@@ -14,8 +16,12 @@ public class Extract : Query
 
     public Extract(RowQuery filter, IEnumerable<Rows> rows)
     {
+        var includedRows = rows.ToList();
+        if (includedRows.Count == 0)
+            throw new ArgumentException("Columns must be selected for Extract query", nameof(rows));
+        
         _filter = filter;
-        _rows.AddRange(rows);
+        _rows.AddRange(includedRows);
     }
 
     public override string Build()

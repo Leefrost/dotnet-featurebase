@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql;
 public class Options : Query
 {
     private readonly Query _query;

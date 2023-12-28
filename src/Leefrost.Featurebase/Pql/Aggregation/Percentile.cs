@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql.Aggregation;
 public class Percentile : Query
 {
     private readonly string _field;

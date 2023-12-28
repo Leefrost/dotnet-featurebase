@@ -1,4 +1,4 @@
-﻿namespace Leefrost.Featurebase.Query.Pql;
+﻿namespace Leefrost.Featurebase.Pql.Selection;
 public class All : RowQuery
 {
     public override string Build()

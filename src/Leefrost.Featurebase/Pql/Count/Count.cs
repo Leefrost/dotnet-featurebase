@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using Leefrost.Featurebase.Pql.Selection;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql.Count;
 
 public class Count : Query
 {
@@ -24,8 +25,8 @@ public class Count : Query
 
         if (_query is not null)
             builder.Append(_query.Build());
-        
-        if(_distinctQuery is not null)
+
+        if (_distinctQuery is not null)
             builder.Append(_distinctQuery.Build());
 
         builder.Append(')');

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql.Selection;
 public class Not : RowQuery
 {
     private readonly RowQuery _row;

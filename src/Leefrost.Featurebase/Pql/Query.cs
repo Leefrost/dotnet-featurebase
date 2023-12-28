@@ -1,4 +1,4 @@
-﻿namespace Leefrost.Featurebase.Query.Pql;
+﻿namespace Leefrost.Featurebase.Pql;
 
 public abstract class Query
 {

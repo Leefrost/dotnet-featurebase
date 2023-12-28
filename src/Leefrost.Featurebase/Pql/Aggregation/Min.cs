@@ -1,30 +1,29 @@
 ﻿using System.Text;
 
-namespace Leefrost.Featurebase.Query.Pql;
-
-public class Sum : Query
+namespace Leefrost.Featurebase.Pql.Aggregation;
+public class Min : Query
 {
     private readonly string _field;
     private readonly RowQuery? _query;
 
-    public Sum(string field)
+    public Min(string field)
     {
-        if(string.IsNullOrEmpty(field))
-            throw new ArgumentException("Filed is required for Sum query", nameof(field));
-        
+        if (string.IsNullOrEmpty(field))
+            throw new ArgumentException("Field is required for Min operation", nameof(field));
+
         _field = field;
     }
 
-    public Sum(RowQuery query, string field)
-        :this(field)
+    public Min(RowQuery query, string field)
+        : this(field)
     {
         _query = query;
     }
-    
+
     public override string Build()
     {
         var builder = new StringBuilder();
-        builder.Append("Sum(");
+        builder.Append("Min(");
 
         if (_query is not null)
             builder.Append($"{_query.Build()}, ");

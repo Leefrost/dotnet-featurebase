@@ -1,25 +1,7 @@
 ﻿using System.Text;
+using Leefrost.Featurebase.Pql.Selection;
 
-namespace Leefrost.Featurebase.Query.Pql;
-
-public class TopNOptions
-{
-    public uint? N { get; set; }
-    public Row? Filter { get; set; }
-    
-    public string ExtendQuery()
-    {
-        var builder = new StringBuilder();
-
-        if (Filter is not null)
-            builder.Append($", {Filter.Build()}");
-
-        if (N is not null)
-            builder.Append($", n={N}");
-
-        return builder.ToString();
-    }
-}
+namespace Leefrost.Featurebase.Pql.Count;
 
 public class TopN : Query
 {
@@ -31,8 +13,8 @@ public class TopN : Query
         _field = field;
     }
 
-    public TopN(Rows field, TopNOptions? options)
-    : this(field)
+    public TopN(Rows field, TopNOptions options)
+        : this(field)
     {
         _options = options;
     }

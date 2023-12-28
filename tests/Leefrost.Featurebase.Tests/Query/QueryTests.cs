@@ -1,5 +1,10 @@
 ﻿using FluentAssertions;
-using Leefrost.Featurebase.Query.Pql;
+using Leefrost.Featurebase.Pql;
+using Leefrost.Featurebase.Pql.Aggregation;
+using Leefrost.Featurebase.Pql.Count;
+using Leefrost.Featurebase.Pql.Exploratory;
+using Leefrost.Featurebase.Pql.Membership;
+using Leefrost.Featurebase.Pql.Selection;
 
 namespace Leefrost.Featurebase.Tests.Query;
 public class QueryTests

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 
-namespace Leefrost.Featurebase.Query.Pql;
+namespace Leefrost.Featurebase.Pql.Selection;
+
 public class Distinct : Query
 {
     private readonly RowQuery _rowQuery;
@@ -9,6 +10,9 @@ public class Distinct : Query
 
     public Distinct(RowQuery rowQuery, string field)
     {
+        if (string.IsNullOrEmpty(field))
+            throw new ArgumentException("Filed must have a value", nameof(field));
+
         _rowQuery = rowQuery;
         _field = field;
     }
@@ -17,7 +21,7 @@ public class Distinct : Query
         : this(rowQuery, field)
     {
         if (string.IsNullOrEmpty(index))
-            throw new ArgumentException("Index must have a value");
+            throw new ArgumentException("Index must have a value", nameof(index));
 
         _index = index;
     }

@@ -163,4 +163,14 @@ public class QueryTests
 
         result.Should().Be("Sum(field=age)");
     }
+
+    [Fact]
+    public void Extract_GetDataAboutWomen_QueryIsValid()
+    {
+        var row = new Extract(new Row("gender", "female"), new Rows("age"));
+
+        var result = row.Build();
+
+        result.Should().Be("Extract(Row(gender=female), Rows(age))");
+    }
 }

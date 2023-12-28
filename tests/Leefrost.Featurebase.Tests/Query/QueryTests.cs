@@ -173,4 +173,14 @@ public class QueryTests
 
         result.Should().Be("Extract(Row(gender=female), Rows(age))");
     }
+
+    [Fact]
+    public void Options_RunQueryOver2Clusters_QueryIsValid()
+    {
+        var row = new Options(new Intersect(new Row("gender", "male"), new Row("20<age<45")), new[] { 0u, 1u });
+
+        var result = row.Build();
+
+        result.Should().Be("Options(Intersect(Row(gender=male),Row(20<age<45)), shards=[0,1])");
+    }
 }

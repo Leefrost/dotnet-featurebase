@@ -15,9 +15,7 @@ public class IncludesColumn : Query
 
     public IncludesColumn(RowQuery query, int column)
         : this(query, column.ToString())
-    {
-
-    }
+    { }
 
     public override string Build()
     {

@@ -4,7 +4,7 @@ namespace Leefrost.Featurebase.Pql.Selection;
 
 public class UnionRows : RowQuery
 {
-    private readonly List<Rows> _rows;
+    private readonly List<Rows> _rows = [];
 
     public UnionRows(IEnumerable<Rows> rows)
     {
@@ -12,7 +12,7 @@ public class UnionRows : RowQuery
         if (queries.Count == 0)
             throw new ArgumentException("UnionRows must have at least one rows argument");
 
-        _rows = queries;
+        _rows.AddRange(queries);
     }
 
     public override string Build()

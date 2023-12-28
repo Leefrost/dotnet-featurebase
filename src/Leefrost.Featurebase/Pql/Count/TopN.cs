@@ -3,7 +3,7 @@ using Leefrost.Featurebase.Pql.Selection;
 
 namespace Leefrost.Featurebase.Pql.Count;
 
-public class TopN : Query
+public class TopN : CountQuery
 {
     private readonly Rows _field;
     private readonly TopNOptions? _options;

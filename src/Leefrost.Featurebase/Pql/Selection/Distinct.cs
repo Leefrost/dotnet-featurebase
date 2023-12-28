@@ -2,7 +2,7 @@
 
 namespace Leefrost.Featurebase.Pql.Selection;
 
-public class Distinct : Query
+public class Distinct : ReadQuery
 {
     private readonly RowQuery _rowQuery;
     private readonly string _field;

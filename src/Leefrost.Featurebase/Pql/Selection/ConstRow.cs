@@ -3,7 +3,7 @@
 namespace Leefrost.Featurebase.Pql.Selection;
 public class ConstRow : RowQuery
 {
-    private readonly List<string> _columns;
+    private readonly List<string> _columns = [];
 
     public ConstRow(IEnumerable<string> columns)
     {
@@ -11,7 +11,7 @@ public class ConstRow : RowQuery
         if (columnList.Count == 0)
             throw new ArgumentException("ConstRow must have at least one column key");
 
-        _columns = columnList;
+        _columns.AddRange(columnList);
     }
 
     public override string Build()

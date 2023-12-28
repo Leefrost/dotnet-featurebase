@@ -17,7 +17,7 @@ public class Difference : RowQuery
         if (queries.Count < 2)
             throw new ArgumentException("Difference must have at least 2 rows to compare");
 
-        _rows = queries;
+        _rows.AddRange(queries);
     }
 
     public override string Build()

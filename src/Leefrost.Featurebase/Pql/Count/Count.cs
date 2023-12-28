@@ -3,7 +3,7 @@ using Leefrost.Featurebase.Pql.Selection;
 
 namespace Leefrost.Featurebase.Pql.Count;
 
-public class Count : Query
+public class Count : CountQuery
 {
     private readonly RowQuery? _query;
     private readonly Distinct? _distinctQuery;

@@ -17,7 +17,7 @@ public class Union : RowQuery
         if (queries.Count == 0)
             throw new ArgumentException("Union must have at least one row argument");
 
-        _rows = queries;
+        _rows.AddRange(queries);
     }
 
     public override string Build()

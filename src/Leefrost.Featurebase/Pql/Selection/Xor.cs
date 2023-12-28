@@ -17,7 +17,7 @@ public class Xor : RowQuery
         if (queries.Count < 2)
             throw new ArgumentException("Xor must have at least 2 row arguments");
 
-        _rows = queries;
+        _rows.AddRange(queries);
     }
 
     public override string Build()

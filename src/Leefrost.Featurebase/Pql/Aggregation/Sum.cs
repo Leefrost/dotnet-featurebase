@@ -2,7 +2,7 @@
 
 namespace Leefrost.Featurebase.Pql.Aggregation;
 
-public class Sum : Query
+public class Sum : ReadQuery
 {
     private readonly string _field;
     private readonly RowQuery? _query;

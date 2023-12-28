@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace Leefrost.Featurebase.Pql.Aggregation;
-public class Min : Query
+public class Min : ReadQuery
 {
     private readonly string _field;
     private readonly RowQuery? _query;

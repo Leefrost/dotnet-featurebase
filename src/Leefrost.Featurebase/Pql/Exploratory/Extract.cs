@@ -3,7 +3,7 @@ using Leefrost.Featurebase.Pql.Selection;
 
 namespace Leefrost.Featurebase.Pql.Exploratory;
 
-public class Extract : Query
+public class Extract : ReadQuery
 {
     private readonly RowQuery _filter;
     private readonly List<Rows> _rows = [];

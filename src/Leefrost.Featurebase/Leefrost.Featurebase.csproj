@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Clients\Cloud\" />
-    <Folder Include="Query\Pql\" />
   </ItemGroup>
 
   <ItemGroup>

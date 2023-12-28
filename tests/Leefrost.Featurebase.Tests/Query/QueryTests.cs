@@ -153,4 +153,14 @@ public class QueryTests
 
         result.Should().Be("Percentile(field=age, nth=50)");
     }
+
+    [Fact]
+    public void Sum_GetTheSumOfAllAges_QueryIsValid()
+    {
+        var row = new Sum("age");
+
+        var result = row.Build();
+
+        result.Should().Be("Sum(field=age)");
+    }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Clients\Cloud\" />
+    <Folder Include="Health\" />
   </ItemGroup>
 
   <ItemGroup>

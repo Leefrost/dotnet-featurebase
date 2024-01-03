@@ -27,16 +27,6 @@ public class CommunityFeaturebaseClientTests
         return new CommunityFeaturebaseClient(httpClient, opt, Mock.Of<ILogger<CommunityFeaturebaseClient>>());
     }
 
-    [Fact]
-    public async Task CheckAvailabilityAsync_CheckIfDbIsAccessible()
-    {
-        var options = new FeaturebaseCommunityOptions { Index = "index" };
-        var client = CreateClient(options, "1");
-
-        var action = () => client.CheckAvailabilityAsync(default);
-
-        await action.Should().NotThrowAsync();
-    }
 
     [Fact]
     public async Task CountAsync_CheckCall_CallIsSuccessful()

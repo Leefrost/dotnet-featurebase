@@ -36,16 +36,6 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         _logger = logger;
     }
 
-    public string Provider => "Community";
-
-    public async Task CheckAvailabilityAsync(CancellationToken cancellationToken)
-    {
-        var content = new StringContent("Limit(All(), limit=1))");
-
-        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
-    }
-
     public async Task<long> CountAsync(string query, CancellationToken cancellationToken)
     {
         var content = new StringContent(query);

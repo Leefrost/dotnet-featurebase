@@ -8,10 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Clients\Cloud\" />
-    <Folder Include="Health\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

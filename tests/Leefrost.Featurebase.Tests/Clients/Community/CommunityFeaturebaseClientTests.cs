@@ -27,7 +27,6 @@ public class CommunityFeaturebaseClientTests
         return new CommunityFeaturebaseClient(httpClient, opt, Mock.Of<ILogger<CommunityFeaturebaseClient>>());
     }
 
-
     [Fact]
     public async Task CountAsync_CheckCall_CallIsSuccessful()
     {

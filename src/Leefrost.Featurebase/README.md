@@ -1,14 +1,9 @@
-<div align="center" text-align="center" width="100%">
-    <img src="/.github/icon.png" alt="Icon" align="center">
-</div>
 <big>
   <h1 align="center">Leefrost.Featurebase</h1>
 </big>
 <p align="center">
   Simple dotnet lib to work with Featurbase DB
 </p>
-
-![NuGet Version](https://img.shields.io/nuget/v/Leefrost.Featurebase)
 
 ### The Purpose
 

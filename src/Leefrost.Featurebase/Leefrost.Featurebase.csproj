@@ -35,10 +35,16 @@
   <PropertyGroup>
     <PackageIcon>icon.png</PackageIcon>
     <Title>Leefrost.Featurebase</Title>
+    <PackageProjectUrl>https://github.com/Leefrost/dotnet-featurebase</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

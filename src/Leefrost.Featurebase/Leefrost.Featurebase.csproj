@@ -7,10 +7,49 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\Cloud\" />
+    <Content Include="..\..\.github\icon.png" Link="icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Clients\Cloud\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Leefrost.Featurebase</PackageId>
+    <Authors>Sergii Lischuk</Authors>
+    <Description>A dotnet helper for Featurebase DB</Description>
+    <RepositoryType>Github</RepositoryType>
+    <RepositoryUrl>https://github.com/Leefrost/dotnet-featurebase</RepositoryUrl>
+    <PackageTags>featurebase, pilosa, pql, dotnet, library</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageIcon>icon.png</PackageIcon>
+    <Title>Leefrost.Featurebase</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MinVer" Version="4.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />

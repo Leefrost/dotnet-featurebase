@@ -1,4 +1,5 @@
 ﻿using Leefrost.Featurebase.Clients.Community.Responses;
+using Leefrost.Featurebase.Pql;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -34,6 +35,27 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         _httpClient = httpClient;
         _options = options.Value;
         _logger = logger;
+    }
+
+    public async Task<TResult> ExecuteAsync<TResult>(Query query, CancellationToken cancellationToken)
+    {
+        var content = new StringContent(query.Build());
+
+        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
+
+        var result = await response.FetchAsync<TResult>(cancellationToken);
+        return result;
+    }
+
+    public Task<IReadOnlyList<TResult>> ExecuteManyAsync<TResult>(Query query, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> CountAsync(CountQuery query, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<long> CountAsync(string query, CancellationToken cancellationToken)

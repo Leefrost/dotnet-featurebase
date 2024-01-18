@@ -1,5 +1,4 @@
-﻿using Leefrost.Featurebase.Clients.Community.Responses;
-using Leefrost.Featurebase.Pql;
+﻿using Leefrost.Featurebase.Pql;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -48,47 +47,9 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         return result;
     }
 
-    public Task<IReadOnlyList<TResult>> ExecuteManyAsync<TResult>(Query query, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<int> CountAsync(CountQuery query, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
-    }
-
-    public async Task<long> CountAsync(string query, CancellationToken cancellationToken)
-    {
-        var content = new StringContent(query);
-
-        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
-
-        var result = await response.FetchAsync<CommunityCount>(cancellationToken);
-        return result.Result;
-    }
-
-    public async Task<IReadOnlyList<string>> SelectAsync(string query, CancellationToken cancellationToken)
-    {
-        var content = new StringContent(query);
-
-        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
-
-        var result = await response.FetchAsync<CommunityDistinct>(cancellationToken);
-        return result.Result.ToList();
-    }
-
-    public async Task<string> ExecuteRawPqlAsync(string query, CancellationToken cancellationToken)
-    {
-        var content = new StringContent(query);
-
-        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
-        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
-
-        var result = await response.Content.ReadAsStringAsync(cancellationToken);
-        return result;
     }
 
     public void Dispose() => _httpClient.Dispose();

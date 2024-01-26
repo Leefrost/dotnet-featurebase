@@ -4,6 +4,9 @@ namespace Leefrost.Featurebase.Clients;
 
 public interface IFeaturebaseClient: IDisposable
 {
-    Task<int> CountAsync(CountQuery query, CancellationToken cancellationToken);
-    Task<TResult> ExecuteAsync<TResult>(Query query, CancellationToken  cancellationToken);
+    Task<long> CountAsync(CountQuery query, CancellationToken cancellationToken);
+
+    Task<TResult> GetAsync<TResult>(Query query, CancellationToken  cancellationToken);
+
+    Task<IReadOnlyCollection<TResult>> GetManyAsync<TResult>(Query query, CancellationToken cancellationToken);
 }

@@ -36,7 +36,18 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         _logger = logger;
     }
 
-    public async Task<TResult> ExecuteAsync<TResult>(Query query, CancellationToken cancellationToken)
+    public async Task<long> CountAsync(CountQuery query, CancellationToken cancellationToken)
+    {
+        var content = new StringContent(query.Build());
+
+        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
+
+        var result = await response.FetchCountAsync(cancellationToken);
+        return result;
+    }
+
+    public async Task<TResult> GetAsync<TResult>(Query query, CancellationToken cancellationToken)
     {
         var content = new StringContent(query.Build());
 
@@ -47,9 +58,15 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         return result;
     }
 
-    public Task<int> CountAsync(CountQuery query, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<TResult>> GetManyAsync<TResult>(Query query, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var content = new StringContent(query.Build());
+
+        using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
+        await response.ThrowIfNotSuccessfulAsync(cancellationToken);
+
+        var result = await response.FetchManyAsync<TResult>(cancellationToken);
+        return result;
     }
 
     public void Dispose() => _httpClient.Dispose();

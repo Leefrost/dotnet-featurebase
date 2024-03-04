@@ -1,9 +1,28 @@
-﻿using Newtonsoft.Json;
+﻿using Leefrost.Featurebase.Clients.Community.Responses;
+using Newtonsoft.Json;
 
 namespace Leefrost.Featurebase.Clients.Community;
 
 internal static class FetchExtensions
 {
+    internal static async Task<long> FetchCountAsync(this HttpResponseMessage message,
+        CancellationToken cancellationToken)
+    {
+        var content = await message.Content.ReadAsStringAsync(cancellationToken);
+        try
+        {
+            var result = JsonConvert.DeserializeObject<CommunityCount>(content)
+                         ?? throw new FeaturebaseException($"Failed to de-serialize response for counting query");
+
+            return result.First;
+        }
+        catch (Exception ex)
+        {
+            throw new FeaturebaseException(
+                "Failed to fetch content Featurebase response. See more info in inner exception.", ex);
+        }
+    }
+
     internal static async Task<TResponse> FetchAsync<TResponse>(this HttpResponseMessage message,
         CancellationToken cancellationToken)
     {
@@ -15,10 +34,10 @@ internal static class FetchExtensions
 
             return result;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
             throw new FeaturebaseException(
-                "Failed to fetch content Featurebase response. See more info in inner exception.", e);
+                "Failed to fetch content Featurebase response. See more info in inner exception.", ex);
         }
     }
 
@@ -43,10 +62,10 @@ internal static class FetchExtensions
 
             return result;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
             throw new FeaturebaseException(
-                "Failed to fetch content Featurebase response. See more info in inner exception.", e);
+                "Failed to fetch content Featurebase response. See more info in inner exception.", ex);
         }
     }
 

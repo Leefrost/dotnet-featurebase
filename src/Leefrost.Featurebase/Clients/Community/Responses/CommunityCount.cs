@@ -2,5 +2,5 @@
 
 internal record CommunityCount(IEnumerable<long> Results)
 {
-    public long Result => Results.FirstOrDefault();
+    public long First => Results.FirstOrDefault();
 }

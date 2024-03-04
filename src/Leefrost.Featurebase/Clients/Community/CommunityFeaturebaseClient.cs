@@ -1,4 +1,4 @@
-﻿using Leefrost.Featurebase.Clients.Community.Responses;
+﻿using Leefrost.Featurebase.Pql;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -36,36 +36,36 @@ public sealed class CommunityFeaturebaseClient : IFeaturebaseClient
         _logger = logger;
     }
 
-    public async Task<long> CountAsync(string query, CancellationToken cancellationToken)
+    public async Task<long> CountAsync(CountQuery query, CancellationToken cancellationToken)
     {
-        var content = new StringContent(query);
+        var content = new StringContent(query.Build());
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
         await response.ThrowIfNotSuccessfulAsync(cancellationToken);
 
-        var result = await response.FetchAsync<CommunityCount>(cancellationToken);
-        return result.Result;
+        var result = await response.FetchCountAsync(cancellationToken);
+        return result;
     }
 
-    public async Task<IReadOnlyList<string>> SelectAsync(string query, CancellationToken cancellationToken)
+    public async Task<TResult> GetAsync<TResult>(Query query, CancellationToken cancellationToken)
     {
-        var content = new StringContent(query);
+        var content = new StringContent(query.Build());
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
         await response.ThrowIfNotSuccessfulAsync(cancellationToken);
 
-        var result = await response.FetchAsync<CommunityDistinct>(cancellationToken);
-        return result.Result.ToList();
+        var result = await response.FetchAsync<TResult>(cancellationToken);
+        return result;
     }
 
-    public async Task<string> ExecuteRawPqlAsync(string query, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<TResult>> GetManyAsync<TResult>(Query query, CancellationToken cancellationToken)
     {
-        var content = new StringContent(query);
+        var content = new StringContent(query.Build());
 
         using var response = await _httpClient.PostAsync(PqlEndpoint, content, cancellationToken);
         await response.ThrowIfNotSuccessfulAsync(cancellationToken);
 
-        var result = await response.Content.ReadAsStringAsync(cancellationToken);
+        var result = await response.FetchManyAsync<TResult>(cancellationToken);
         return result;
     }
 

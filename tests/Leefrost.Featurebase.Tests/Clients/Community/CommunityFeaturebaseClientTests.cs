@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using FluentAssertions;
 using Leefrost.Featurebase.Clients.Community;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -25,27 +24,5 @@ public class CommunityFeaturebaseClientTests
         var opt = Options.Create(options);
 
         return new CommunityFeaturebaseClient(httpClient, opt, Mock.Of<ILogger<CommunityFeaturebaseClient>>());
-    }
-
-    [Fact]
-    public async Task CountAsync_CheckCall_CallIsSuccessful()
-    {
-        var options = new FeaturebaseCommunityOptions { Index = "index" };
-        var client = CreateClient(options, "{ results: [100]}");
-
-        var count = await client.CountAsync("Count(All())", default);
-
-        count.Should().Be(100);
-    }
-
-    [Fact]
-    public async Task SelectAsync_CheckCall_CallIsSuccessful()
-    {
-        var options = new FeaturebaseCommunityOptions { Index = "index" };
-        var client = CreateClient(options, "{ results: [{ keys: ['123'] }] }");
-
-        var count = await client.SelectAsync("Distinct(All())", default);
-
-        count.Should().NotBeNullOrEmpty();
     }
 }

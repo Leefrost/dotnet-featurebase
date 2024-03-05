@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Leefrost.Featurebase" Version="0.0.1" />
+    <Content Remove="C:\Users\Leefrost\.nuget\packages\leefrost.featurebase\0.0.1\contentFiles\any\net8.0\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Leefrost.Featurebase\Leefrost.Featurebase.csproj" />
   </ItemGroup>
 
 </Project>

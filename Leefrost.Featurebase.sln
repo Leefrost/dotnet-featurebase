@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leefrost.Featurebase", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A8435A47-B1FF-47AD-974F-D6BAE509AA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leefrost.Featurebase.Tests", "tests\Leefrost.Featurebase.Tests\Leefrost.Featurebase.Tests.csproj", "{F24A104C-2F15-42BF-B515-311AB2155D0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leefrost.Featurebase.Tests", "tests\Leefrost.Featurebase.Tests\Leefrost.Featurebase.Tests.csproj", "{F24A104C-2F15-42BF-B515-311AB2155D0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{58E4A519-9C35-4888-B4DC-B8968FF40772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureBaseSampleWebApp", "samples\FeatureBaseSampleWebApp\FeatureBaseSampleWebApp.csproj", "{D36A4045-8373-478B-A3E5-B644060A817E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +27,17 @@ Global
 		{F24A104C-2F15-42BF-B515-311AB2155D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F24A104C-2F15-42BF-B515-311AB2155D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F24A104C-2F15-42BF-B515-311AB2155D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D36A4045-8373-478B-A3E5-B644060A817E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D36A4045-8373-478B-A3E5-B644060A817E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D36A4045-8373-478B-A3E5-B644060A817E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D36A4045-8373-478B-A3E5-B644060A817E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F24A104C-2F15-42BF-B515-311AB2155D0B} = {A8435A47-B1FF-47AD-974F-D6BAE509AA1D}
+		{D36A4045-8373-478B-A3E5-B644060A817E} = {58E4A519-9C35-4888-B4DC-B8968FF40772}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE113756-4C41-4737-AC6F-0C742AA73495}
